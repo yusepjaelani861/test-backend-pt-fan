@@ -1,8 +1,8 @@
 # RestAPI NodeJS with Prisma ORM
 
 ## Server Requirement
-Node v18.10.0+
-PostgreSQL 14.3+
+- Node v18.10.0+
+- PostgreSQL 14.3+
 
 ## Installation
 
