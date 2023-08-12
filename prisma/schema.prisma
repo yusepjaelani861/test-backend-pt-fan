@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model User {
+  id             Int    @id @default(autoincrement())
+  nama           String
+  email          String @unique
+  npp            Int    @unique
+  npp_supervisor Int?
+  password       String
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  epresences      Epresence[]
+}
+
+model Epresence {
+  id          Int      @id @default(autoincrement())
+  id_users    Int
+  type        String
+  is_approve  Boolean  @default(false)
+  waktu       DateTime
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  user        User     @relation(fields: [id_users], references: [id])
+}
